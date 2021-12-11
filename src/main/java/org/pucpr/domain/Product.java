@@ -16,8 +16,6 @@ public class Product {
     @Id
     private String id;
     private String name;
-    private String category;
     private Company company;
-    private List<ProductItem> items;
 
 }

@@ -12,4 +12,6 @@ public class Company {
     @Id
     private String id;
     private String name;
+    private String endereco;
+    private String cep;
 }

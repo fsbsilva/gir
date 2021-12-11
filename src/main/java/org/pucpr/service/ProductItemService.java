@@ -1,9 +1,6 @@
 package org.pucpr.service;
 
-import org.pucpr.domain.Product;
-import org.pucpr.domain.ProductItem;
 import org.pucpr.repository.ProductItemRepository;
-import org.pucpr.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

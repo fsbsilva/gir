@@ -2,10 +2,7 @@ package org.pucpr.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.pucpr.domain.Product;
-import org.pucpr.domain.ProductItem;
-import org.pucpr.dto.ProductDTO;
 import org.pucpr.dto.ProductItemDTO;
-import org.pucpr.service.ProductItemService;
 import org.pucpr.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

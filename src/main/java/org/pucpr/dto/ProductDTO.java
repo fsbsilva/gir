@@ -3,10 +3,8 @@ package org.pucpr.dto;
 import lombok.Data;
 import org.pucpr.domain.Company;
 import org.pucpr.domain.Product;
-import org.pucpr.domain.ProductItem;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
 import java.util.List;
 
 @Data

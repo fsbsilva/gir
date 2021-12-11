@@ -10,12 +10,12 @@ import java.util.List;
 @Document
 @Data
 @Builder
-public class Project {
+public class ProjectStock {
 
     @Id
     private String id;
-    private String name;
-    private List<Type> types;
+    private Project project;
+    private List<Product> products;
 
 
 }

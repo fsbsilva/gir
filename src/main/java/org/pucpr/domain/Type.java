@@ -5,17 +5,18 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.util.List;
 
 @Document
 @Data
 @Builder
-public class ProductItem {
+public class Type {
 
     @Id
-    private String serialNumber;
-    private Date dateEntry;
-    private Date dateOut;
-    private int project_id;
-
+    private String id;
+    private String name;
+    private String category;
+    private List<Product> products;
+    private long totalIn;
+    private long totalOut;
 }

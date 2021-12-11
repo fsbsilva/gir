@@ -5,17 +5,13 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Document
 @Data
 @Builder
-public class Project {
-
+public class Alert {
     @Id
     private String id;
-    private String name;
-    private List<Type> types;
-
+    private int min;
+    private int max;
 
 }

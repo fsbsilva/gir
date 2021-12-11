@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProjectStockRepository extends MongoRepository<ProjectStock,String> {
+public interface ProjectStockRepository extends MongoRepository<ProjectStock,String> {
+
 
 }

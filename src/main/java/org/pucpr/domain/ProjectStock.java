@@ -15,7 +15,5 @@ public class ProjectStock {
     @Id
     private String id;
     private Project project;
-    private List<Product> products;
-
 
 }

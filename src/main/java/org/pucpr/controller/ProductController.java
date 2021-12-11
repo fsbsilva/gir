@@ -34,7 +34,6 @@ public class ProductController {
         Optional<Product> data = service.findById(id);
         if ( data.isPresent() ) {
             Product product = data.get();
-            product.setCategory(dto.getCategory());
             product.setName(dto.getName());
             service.save(product);
         } else {

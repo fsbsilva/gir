@@ -15,14 +15,11 @@ public class ProductDTO {
     private String name;
     private String category;
     private Company company;
-    private List<ProductItem> items;
 
     public Product toProduct(){
         return Product.builder()
                 .name(this.name)
-                .category(this.category)
                 .company(this.company)
-                .items(this.items)
                 .build();
     }
 }

@@ -19,4 +19,5 @@ public class Type {
     private List<Product> products;
     private long totalIn;
     private long totalOut;
+    private Alert alert;
 }

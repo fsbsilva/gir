@@ -1,0 +1,35 @@
+{
+  "project": {
+    "name": "Rio de Janeiro",
+    "types": [{
+      "name": "OLT",
+      "category": "equipamento",
+      "products": [
+        {
+          "name": "OLT-100",
+          "company": {
+            "name": "Furukawa",
+            "endereco": "Rua Eurides",
+            "cep": "08320-010"
+          },
+          "totalIn": 5,
+          "totalOut": 1
+        },
+        {
+          "name": "OLT-3016",
+          "company": {
+            "name": "Furukawa",
+            "endereco": "Rua Eurides",
+            "cep": "08320-010"
+          },
+          "totalIn": 5,
+          "totalOut": 2
+        }
+      ],
+      "alert": {
+        "min": 1,
+        "max": 10
+      }
+    }]
+  }
+}

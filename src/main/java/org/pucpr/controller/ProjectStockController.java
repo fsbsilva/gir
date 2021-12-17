@@ -1,8 +1,10 @@
 package org.pucpr.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.pucpr.domain.Product;
 import org.pucpr.domain.Project;
 import org.pucpr.domain.ProjectStock;
+import org.pucpr.domain.Type;
 import org.pucpr.dto.ProjectDTO;
 import org.pucpr.dto.ProjectStockDTO;
 
@@ -29,6 +31,22 @@ public class ProjectStockController {
         log.info("Request : {}", dto);
         UUID uudi = UUID.randomUUID();
         dto.getProject().setId(uudi.toString());
+        if ( dto.getProject().getTypes().size() > 0 ){
+            for ( Type type : dto.getProject().getTypes() ){
+                uudi = UUID.randomUUID();
+                type.setId(uudi.toString());
+                if ( type.getProducts().size() > 0 ){
+                    for ( Product product : type.getProducts() ){
+                        uudi = UUID.randomUUID();
+                        product.setName(uudi.toString());
+                        if ( product.getCompany() != null ) {
+                            uudi = UUID.randomUUID();
+                            product.getCompany().setId(uudi.toString());
+                        }
+                    }
+                }
+            }
+        }
         service.save(dto.toProjectStock());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

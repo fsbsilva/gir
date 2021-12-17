@@ -1,5 +1,6 @@
 package org.pucpr.service;
 
+import org.pucpr.domain.Product;
 import org.pucpr.domain.Project;
 import org.pucpr.domain.ProjectStock;
 import org.pucpr.repository.ProjectRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectStockService {
@@ -25,6 +27,10 @@ public class ProjectStockService {
 
     public List<ProjectStock> findAll() {
         return repository.findAll();
+    }
+
+    public Optional<ProjectStock> findById(String id) {
+        return repository.findById(id);
     }
 
 }

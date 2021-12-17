@@ -1,9 +1,11 @@
 package org.pucpr.service;
 
+import org.json.JSONObject;
 import org.pucpr.domain.Company;
 import org.pucpr.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -23,4 +25,6 @@ public class CompanyService {
     public List<Company> findAll() {
         return repository.findAll();
     }
+
+
 }

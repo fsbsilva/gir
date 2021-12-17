@@ -2,10 +2,10 @@ package org.pucpr.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.pucpr.domain.Product;
+import org.pucpr.domain.Type;
 import org.pucpr.dto.ProductDTO;
+import org.pucpr.repository.TypeRepository;
 import org.pucpr.service.ProductService;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,11 @@ import java.util.Optional;
 @Slf4j
 public class ProductController {
     private final ProductService service;
+    private final TypeRepository typeRepository;
 
-    public ProductController(ProductService service) {this.service = service;}
+    public ProductController(ProductService service, TypeRepository typeRepository) {this.service = service;
+        this.typeRepository = typeRepository;
+    }
 
     @PostMapping("/product")
     public ResponseEntity addProject(@RequestBody ProductDTO dto) {
@@ -46,6 +49,22 @@ public class ProductController {
     @GetMapping("/products")
     public List<Product> getAll() {
         return service.findAll();
+    }
+
+    @PutMapping("/product/{id}/add/{num}")
+    public ResponseEntity addProduct(@PathVariable("id") String id,
+                                     @PathVariable("num") String num  ) {
+        log.info("Request : {}", id);
+
+        Optional<Product> data = service.findById(id);
+        Product product  = service.findById(id).orElseThrow( ()-> new RuntimeException());
+        product.setTotalIn(product.getTotalIn() + Long.valueOf(num) );
+        service.save(product);
+
+        Type type = typeRepository.findById(product.getType_id()).orElseThrow( ()-> new RuntimeException());
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
 

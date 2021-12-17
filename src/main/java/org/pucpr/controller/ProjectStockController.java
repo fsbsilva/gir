@@ -1,22 +1,20 @@
 package org.pucpr.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.pucpr.domain.Product;
-import org.pucpr.domain.Project;
-import org.pucpr.domain.ProjectStock;
-import org.pucpr.domain.Type;
+import org.json.JSONObject;
+import org.pucpr.domain.*;
+import org.pucpr.dto.ProductDTO;
 import org.pucpr.dto.ProjectDTO;
 import org.pucpr.dto.ProjectStockDTO;
 
 import org.pucpr.service.ProjectStockService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -27,7 +25,7 @@ public class ProjectStockController {
     public ProjectStockController(ProjectStockService service) {this.service = service;}
 
     @PostMapping("/projectstock")
-    public ResponseEntity addProject(@RequestBody ProjectStockDTO dto) {
+    public ResponseEntity createProjectStock(@RequestBody ProjectStockDTO dto) {
         log.info("Request : {}", dto);
         UUID uudi = UUID.randomUUID();
         dto.getProject().setId(uudi.toString());
@@ -38,10 +36,13 @@ public class ProjectStockController {
                 if ( type.getProducts().size() > 0 ){
                     for ( Product product : type.getProducts() ){
                         uudi = UUID.randomUUID();
-                        product.setName(uudi.toString());
+                        product.setId(uudi.toString());
                         if ( product.getCompany() != null ) {
                             uudi = UUID.randomUUID();
                             product.getCompany().setId(uudi.toString());
+                            product.setType_id(type.getId());
+                            Company company = getCEP(product.getCompany());
+                            product.setCompany(company);
                         }
                     }
                 }
@@ -51,8 +52,20 @@ public class ProjectStockController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    private Company getCEP(Company company)    {
+        final String uri = "https://viacep.com.br/ws/" + company.getCep() + "/json/";
+        RestTemplate restTemplate = new RestTemplate();
+        String json = restTemplate.getForObject(uri, String.class);
+        JSONObject obj = new JSONObject(json);
+        company.setEndereco(obj.getString("logradouro"));
+        return company;
+    }
+
     @GetMapping("/projectstocks")
     public List<ProjectStock> getAll() {
         return service.findAll();
     }
+
+
+
 }

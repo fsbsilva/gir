@@ -17,7 +17,5 @@ public class Type {
     private String name;
     private String category;
     private List<Product> products;
-    private long totalIn;
-    private long totalOut;
     private Alert alert;
 }

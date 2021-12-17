@@ -17,5 +17,8 @@ public class Product {
     private String id;
     private String name;
     private Company company;
+    private long totalIn;
+    private long totalOut;
+    private String type_id;
 
 }
